@@ -5,6 +5,7 @@ import {
   Platform,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 
@@ -34,15 +35,20 @@ export class HomeScreen extends React.Component {
       return false;
     }
     return entries.map((entry, index) => (
-      <View key={`entry-${entry.id}`} style={styles.slide}>
-        <Image
-          source={{
-            uri: entry.card.card_art_url,
-          }}
-          style={styles.cardImage}
-          id={index}
-        />
-      </View>
+      <TouchableOpacity
+        activeOpacity={0.7}
+        style={styles.slideInnerContainer}
+      >
+        <View key={`entry-${entry.id}`} style={styles.slide}>
+          <Image
+            source={{
+              uri: entry.card.card_art_url,
+            }}
+            style={styles.cardImage}
+            id={index}
+          />
+        </View>
+      </TouchableOpacity>
     ));
   }
 
@@ -51,7 +57,7 @@ export class HomeScreen extends React.Component {
       <Carousel
         sliderWidth={300}
         itemWidth={300}
-        firstItem={1}
+        firstItem={0}
         inactiveSlideScale={0.94}
         inactiveSlideOpacity={0.6}
         enableMomentum={false}
