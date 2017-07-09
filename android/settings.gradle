@@ -1,0 +1,3 @@
+rootProject.name = 'gain'
+
+include ':app'

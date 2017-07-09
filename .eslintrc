@@ -1,0 +1,35 @@
+{
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "mocha": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true,
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "plugins": [
+    "react",
+    "react-native"
+  ],
+  "rules": {
+    "jsx-a11y/href-no-hash": "off",
+    "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react-native/no-unused-styles": 2,
+    "react-native/split-platform-components": 2,
+    "react-native/no-inline-styles": 2,
+    "react-native/no-color-literals": 0,
+
+    //variables
+    "no-use-before-define": 0,       // disallow use of variables before they are defined
+  }
+}
