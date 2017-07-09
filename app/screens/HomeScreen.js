@@ -15,8 +15,14 @@ import { load as loadMyCards } from '../ducks/mycards';
 const sourceIcon = require('../../assets/images/gain-icon.png');
 
 export class HomeScreen extends React.Component {
-  static navigationOptions = {
-    header: null,
+  static defaultProps = {
+    load: this.load,
+    myCards: {},
+  };
+
+  static propTypes = {
+    load: PropTypes.func,
+    myCards: PropTypes.object,
   };
 
   componentDidMount() {
@@ -40,7 +46,7 @@ export class HomeScreen extends React.Component {
     ));
   }
 
-  get example1() {
+  get loadCarouselWithCards() {
     return (
       <Carousel
         sliderWidth={300}
@@ -70,7 +76,7 @@ export class HomeScreen extends React.Component {
             Your Cards
           </Text>
           <View style={[styles.codeHighlightContainer1, styles.homeScreenFilename]}>
-            {this.example1}
+            { this.loadCarouselWithCards }
           </View>
           <Text style={styles.getStartedText}>
             Sanjay You have 2 Cards in your wallet.
@@ -86,16 +92,6 @@ export class HomeScreen extends React.Component {
     );
   }
 }
-
-HomeScreen.defaultProps = {
-  load: this.load,
-  myCards: {},
-};
-
-HomeScreen.propTypes = {
-  load: PropTypes.func,
-  myCards: PropTypes.object,
-};
 
 export function mapStateToProps(state) {
   return { myCards: state.mycards };
