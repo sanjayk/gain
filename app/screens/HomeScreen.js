@@ -5,13 +5,13 @@ import {
   Platform,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 
 import Carousel from 'react-native-snap-carousel';
 import { connect } from 'react-redux';
 import { load as loadMyCards } from '../ducks/mycards';
+import CardSlider from './fragments/CardSlider';
 
 const sourceIcon = require('../../assets/images/gain-icon.png');
 
@@ -35,20 +35,12 @@ export class HomeScreen extends React.Component {
       return false;
     }
     return entries.map((entry, index) => (
-      <TouchableOpacity
-        activeOpacity={0.7}
-        style={styles.slideInnerContainer}
-      >
-        <View key={`entry-${entry.id}`} style={styles.slide}>
-          <Image
-            source={{
-              uri: entry.card.card_art_url,
-            }}
-            style={styles.cardImage}
-            id={index}
-          />
-        </View>
-      </TouchableOpacity>
+      <CardSlider
+        key={`carousel-entry-${entry.id}`}
+        even={(entry.id) % 2 === 0}
+        id={index}
+        {...entry}
+      />
     ));
   }
 
@@ -122,13 +114,6 @@ const styles = StyleSheet.create({
   welcomeImage: {
     width: 150,
     height: 75,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
-  },
-  cardImage: {
-    width: 300,
-    height: 150,
     resizeMode: 'contain',
     marginTop: 3,
     marginLeft: -10,
