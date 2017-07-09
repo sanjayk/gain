@@ -1,19 +1,5 @@
-import React from 'react';
-import { Text, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-
-class HomeScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Welcome',
-  };
-  render() {
-    return (
-      <View>
-        <Text>Hello, Navigation!</Text>
-      </View>
-    );
-  }
-}
+import HomeScreen from '../screens/HomeScreen';
 
 const SimpleAppNavigator = StackNavigator({
   Home: { screen: HomeScreen },

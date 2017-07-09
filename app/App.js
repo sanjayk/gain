@@ -1,27 +1,52 @@
 
-import React, { Component } from 'react';
+import React from 'react';
 import {
-  AppRegistry,
   StyleSheet,
+  View,
   Text,
-  View
 } from 'react-native';
+import { Provider } from 'react-redux';
 
-import SimpleAppNavigator from './navigation/RootNavigation';
+import AppNavigator from './navigation/RootNavigation';
+import createStore from './ducks/create';
+import ApiClient from './utilities/ApiClient';
 
-export default class App extends Component {
-  render() {
+const client = new ApiClient();
+const store = createStore(client, {});
+
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: false,
+    };
+  }
+
+  renderLoadingMessage() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <SimpleAppNavigator />
+      <View style={styles.loadingContainer}>
+        <Text>Contacting Unsplash</Text>
       </View>
     );
+  }
+
+  renderResults() {
+    return (
+      <View style={styles.container}>
+        <Provider store={store}>
+          <AppNavigator />
+        </Provider>
+      </View>
+    );
+  }
+
+  render() {
+    const { isLoading } = this.state;
+
+    if (isLoading) {
+      return this.renderLoadingMessage();
+    }
+    return this.renderResults();
   }
 }
 
@@ -30,16 +55,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+    backgroundColor: '#FFFFFF',
   },
 });
+
+// export default App;
