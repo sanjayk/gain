@@ -1,13 +1,11 @@
-import { createStore as _createStore, applyMiddleware, compose } from 'redux';
-import createMiddleware from './middleware/client_middleware';
 import thunk from 'redux-thunk';
-import Immutable from 'immutable';
+import { createStore as _createStore, applyMiddleware } from 'redux';
+import createMiddleware from './middleware/client_middleware';
 
 export default function createStore(client, data) {
-
   const middleware = [createMiddleware(client), thunk];
 
-  let finalCreateStore = applyMiddleware(...middleware)(_createStore);
+  const finalCreateStore = applyMiddleware(...middleware)(_createStore);
 
 
   const reducer = require('./index').default;

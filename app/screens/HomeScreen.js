@@ -12,6 +12,7 @@ import Carousel from 'react-native-snap-carousel';
 import { connect } from 'react-redux';
 import { load as loadMyCards } from '../ducks/mycards';
 import CardSlider from './fragments/CardSlider';
+import GeolocationExample from './LocationScreen';
 
 const sourceIcon = require('../../assets/images/gain-icon.png');
 
@@ -73,12 +74,13 @@ export class HomeScreen extends React.Component {
           <Text style={styles.getStartedText}>
             Your Cards
           </Text>
-          <View style={[styles.codeHighlightContainer1, styles.homeScreenFilename]}>
+          <View style={[styles.cardContainer]}>
             { this.loadCarouselWithCards }
           </View>
-          <Text style={styles.getStartedText}>
-            Sanjay You have 2 Cards in your wallet.
-          </Text>
+        </View>
+
+        <View style={styles.locationContainer}>
+          <GeolocationExample />
         </View>
 
         <View style={styles.tabBarInfoContainer}>
@@ -108,8 +110,16 @@ const styles = StyleSheet.create({
   },
   welcomeContainer: {
     alignItems: 'center',
+    marginBottom: 20,
+  },
+  locationContainer: {
     marginTop: 10,
     marginBottom: 20,
+    width: 350,
+    right: 150,
+  },
+  cardContainer: {
+    height: 250,
   },
   welcomeImage: {
     width: 150,
@@ -121,9 +131,6 @@ const styles = StyleSheet.create({
   getStartedContainer: {
     alignItems: 'center',
     marginHorizontal: 50,
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
   },
   getStartedText: {
     fontSize: 17,
