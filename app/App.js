@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { Provider } from 'react-redux';
 
-import AppNavigator from './navigation/RootNavigation';
+import AppNavigator from './navigation/AppNavigator';
 import createStore from './ducks/create';
 import ApiClient from './utilities/ApiClient';
 

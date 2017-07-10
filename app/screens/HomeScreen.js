@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 import { load as loadMyCards } from '../ducks/mycards';
 import CardSlider from './fragments/CardSlider';
 import GeolocationExample from './LocationScreen';
+import LocationButton from './fragments/LocationButton';
 
 const sourceIcon = require('../../assets/images/gain-icon.png');
 
@@ -80,7 +81,8 @@ export class HomeScreen extends React.Component {
         </View>
 
         <View style={styles.locationContainer}>
-          <GeolocationExample />
+          {/* <GeolocationExample /> */}
+          <LocationButton />
         </View>
 
         <View style={styles.tabBarInfoContainer}>
