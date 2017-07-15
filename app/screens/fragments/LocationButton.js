@@ -1,24 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Button } from 'react-native';
-import { NavigationActions } from 'react-navigation';
 
-const LocationButton = ({ locationScreen }) => (
+const LocationButton = ({ navigation, routeParams }) => (
   <Button
     title={'Open Location Screen'}
-    onPress={locationScreen}
+    onPress={() => navigation.navigate('Location', { routeParams })}
   />
 );
 
+LocationButton.defaultProps = {
+  load: this.load,
+  myCards: {},
+  navigation: {},
+  routeParams: {
+    placeholder: 'Enter Location',
+    minLength: 2,
+    autoFocus: false,
+    returnKeyType: 'default',
+    fetchDetails: true,
+    predefinedPlacesDescription: {
+      color: '#1faadb',
+    },
+    currentLocation: false,
+  },
+};
+
 LocationButton.propTypes = {
-  locationScreen: PropTypes.func.isRequired,
+  navigation: PropTypes.object.isRequired,
+  routeParams: PropTypes.object,
 };
 
 
-const mapDispatchToProps = dispatch => ({
-  locationScreen: () =>
-    dispatch(NavigationActions.navigate({ routeName: 'Location' })),
-});
-
-export default connect(null, mapDispatchToProps)(LocationButton);
+export default LocationButton;
