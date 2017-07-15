@@ -12,7 +12,7 @@ import Carousel from 'react-native-snap-carousel';
 import { connect } from 'react-redux';
 import { load as loadMyCards } from '../ducks/mycards';
 import CardSlider from './fragments/CardSlider';
-import GeolocationExample from './LocationScreen';
+//import GeolocationExample from './LocationScreen';
 import LocationButton from './fragments/LocationButton';
 
 const sourceIcon = require('../../assets/images/gain-icon.png');
@@ -21,11 +21,13 @@ export class HomeScreen extends React.Component {
   static defaultProps = {
     load: this.load,
     myCards: {},
+    navigation: {},
   };
 
   static propTypes = {
     load: PropTypes.func,
     myCards: PropTypes.object,
+    navigation: PropTypes.object,
   };
 
   componentDidMount() {
@@ -82,7 +84,7 @@ export class HomeScreen extends React.Component {
 
         <View style={styles.locationContainer}>
           {/* <GeolocationExample /> */}
-          <LocationButton />
+          <LocationButton navigation={this.props.navigation} />
         </View>
 
         <View style={styles.tabBarInfoContainer}>
@@ -118,7 +120,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 20,
     width: 350,
-    right: 150,
+    alignItems: 'center',
   },
   cardContainer: {
     height: 250,
