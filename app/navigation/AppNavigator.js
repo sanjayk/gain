@@ -1,7 +1,7 @@
 import { StackNavigator } from 'react-navigation';
 
 import HomeScreen from '../screens/HomeScreen';
-import { GooglePlacesAutocomplete } from '../screens/GooglePlacesAutoComplete';
+import { GooglePlacesAutocompleteScreen } from '../screens/GooglePlacesAutoCompleteScreen';
 
 const AppNavigator = StackNavigator({
   Home: {
@@ -11,7 +11,7 @@ const AppNavigator = StackNavigator({
     },
   },
   Location: {
-    screen: GooglePlacesAutocomplete,
+    screen: GooglePlacesAutocompleteScreen,
   },
 });
 
