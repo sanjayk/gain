@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-native';
 
-const LocationButton = ({ navigation, routeParams }) => (
+const LocationButton = ({ navigation, routeParams, location }) => (
   <Button
     title={'Open Location Screen'}
-    onPress={() => navigation.navigate('Location', { routeParams })}
+    onPress={() => navigation.navigate('Location', { routeParams, location })}
   />
 );
 
@@ -24,11 +24,13 @@ LocationButton.defaultProps = {
     },
     currentLocation: false,
   },
+  location: {},
 };
 
 LocationButton.propTypes = {
   navigation: PropTypes.object.isRequired,
   routeParams: PropTypes.object,
+  location: PropTypes.object,
 };
 
 

@@ -11,6 +11,7 @@ import {
 import Carousel from 'react-native-snap-carousel';
 import { connect } from 'react-redux';
 import { load as loadMyCards } from '../ducks/mycards';
+import { getAndSetCurrentLocation } from '../ducks/location';
 import CardSlider from './fragments/CardSlider';
 //import GeolocationExample from './LocationScreen';
 import LocationButton from './fragments/LocationButton';
@@ -20,18 +21,23 @@ const sourceIcon = require('../../assets/images/gain-icon.png');
 export class HomeScreen extends React.Component {
   static defaultProps = {
     load: this.load,
+    geoLocation: this.geoLocation,
+    position: {},
     myCards: {},
     navigation: {},
   };
 
   static propTypes = {
     load: PropTypes.func,
+    geoLocation: PropTypes.func,
+    position: PropTypes.object,
     myCards: PropTypes.object,
     navigation: PropTypes.object,
   };
 
   componentDidMount() {
     this.props.load();
+    this.props.geoLocation();
   }
 
   getSlides(entries) {
@@ -84,7 +90,7 @@ export class HomeScreen extends React.Component {
 
         <View style={styles.locationContainer}>
           {/* <GeolocationExample /> */}
-          <LocationButton navigation={this.props.navigation} />
+          <LocationButton navigation={this.props.navigation} screenProps={this.props.position} />
         </View>
 
         <View style={styles.tabBarInfoContainer}>
@@ -98,11 +104,15 @@ export class HomeScreen extends React.Component {
 }
 
 export function mapStateToProps(state) {
-  return { myCards: state.mycards };
+  return {
+    myCards: state.mycards,
+    position: state.location,
+  };
 }
 
 const mapDispatchToProps = dispatch => ({
   load: () => dispatch(loadMyCards()),
+  geoLocation: () => dispatch(getAndSetCurrentLocation()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
