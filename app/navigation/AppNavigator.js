@@ -2,6 +2,7 @@ import { StackNavigator } from 'react-navigation';
 
 import HomeScreen from '../screens/HomeScreen';
 import GPACScreen from '../screens/GPACScreen';
+import CardMatchScreen from '../screens/CardMatchScreen';
 
 const AppNavigator = StackNavigator({
   Home: {
@@ -12,6 +13,9 @@ const AppNavigator = StackNavigator({
   },
   Location: {
     screen: GPACScreen,
+  },
+  CardMatch: {
+    screen: CardMatchScreen,
   },
 });
 

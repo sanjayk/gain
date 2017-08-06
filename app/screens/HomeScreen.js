@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
       },
     }),
     alignItems: 'center',
-    backgroundColor: '#fbfbfb',
+    backgroundColor: '#ffffff',
     paddingVertical: 20,
   },
   tabBarInfoText: {

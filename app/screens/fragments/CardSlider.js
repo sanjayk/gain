@@ -28,31 +28,31 @@ export default class CardSlider extends React.Component {
     };
 
     render() {
-    const { productName, productIssuer, cardArtUrl, even } = this.props.card;
-    return (
-      <TouchableOpacity
-        activeOpacity={0.7}
-        style={styles.slideInnerContainer}
-      >
-        <View style={[styles.imageContainer, even ? styles.imageContainerEven : {}]}>
-          <Image
-            source={{ uri: cardArtUrl }}
-            style={styles.image}
-          />
-          <View style={[styles.radiusMask, even ? styles.radiusMaskEven : {}]} />
-        </View>
-        <View style={[styles.textContainer, even ? styles.textContainerEven : {}]}>
-          <Text style={styles.title}>
-            { productName }
-          </Text>
-          <Text
-            style={[styles.subtitle, even ? styles.subtitleEven : {}]}
-            numberOfLines={2}
-          >{ productIssuer }</Text>
-        </View>
-      </TouchableOpacity>
-    );
-  }
+      const { productName, productIssuer, cardArtUrl, even } = this.props.card;
+      return (
+        <TouchableOpacity
+          activeOpacity={0.7}
+          style={styles.slideInnerContainer}
+        >
+          <View style={[styles.imageContainer, even ? styles.imageContainerEven : {}]}>
+            <Image
+              source={{ uri: cardArtUrl }}
+              style={styles.image}
+            />
+            <View style={[styles.radiusMask, even ? styles.radiusMaskEven : {}]} />
+          </View>
+          <View style={[styles.textContainer, even ? styles.textContainerEven : {}]}>
+            <Text style={styles.title}>
+              { productName }
+            </Text>
+            <Text
+              style={[styles.subtitle, even ? styles.subtitleEven : {}]}
+              numberOfLines={2}
+            >{ productIssuer }</Text>
+          </View>
+        </TouchableOpacity>
+      );
+    }
 }
 
 const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');

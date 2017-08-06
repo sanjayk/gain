@@ -19,6 +19,7 @@ const WINDOW = Dimensions.get('window');
 const defaultStyles = {
   container: {
     flex: 1,
+    backgroundColor: '#FFFFFF',
   },
   poweredContainer: {
     justifyContent: 'flex-end',
@@ -49,6 +50,7 @@ export class GPACScreen extends React.Component {
     isRowScrollable: true,
     keyboardShouldPersistTaps: 'always',
     listUnderlayColor: '#c8c7cc',
+    navigation: {},
   };
 
   static propTypes = {
@@ -59,6 +61,8 @@ export class GPACScreen extends React.Component {
     isRowScrollable: React.PropTypes.bool,
     listUnderlayColor: React.PropTypes.string,
     keyboardShouldPersistTaps: React.PropTypes.string,
+    navigation: PropTypes.object,
+
   };
 
   constructor(props) {
@@ -68,6 +72,7 @@ export class GPACScreen extends React.Component {
     this.state = {
       dataSource: this.ds.cloneWithRows(gData),
       location: this.props.location,
+      mycards: this.props.myCards,
     };
     this._renderRow = this._renderRow.bind(this);
   }
@@ -107,7 +112,7 @@ export class GPACScreen extends React.Component {
     );
   }
 
-  _renderRow(rowData = {}) {
+  _renderRow(rowData = {}, sectionID, rowID) {
     return (
       <ScrollView
         scrollEnabled={this.props.isRowScrollable}
@@ -119,6 +124,7 @@ export class GPACScreen extends React.Component {
         <TouchableHighlight
           style={{ minWidth: WINDOW.width }}
           underlayColor={this.props.listUnderlayColor || '#c8c7cc'}
+          onPress={this._onPressRow.bind(this, rowData, rowID)}
         >
           <View style={[defaultStyles.row]}>
             {this._renderRowData(rowData)}
@@ -126,6 +132,26 @@ export class GPACScreen extends React.Component {
         </TouchableHighlight>
       </ScrollView>
     );
+  }
+//onPress={() => this.props.navigation.navigate('CardMatch', { localState })}
+  _onPressRow(rowData, rowID) {
+    const businessType = rowData.types;
+    const setBusinessType = new Set(businessType);
+    const cardsInWallet = this.props.myCards.cards;
+    let card = {};
+    for (const cardIndex in cardsInWallet) {
+      const useFor = cardsInWallet[cardIndex].card.use_for;
+      card = cardsInWallet[cardIndex].card;
+      const useForSet = new Set(useFor);
+      const intersection = new Set(
+        [...setBusinessType].filter(x => useForSet.has(x)));
+      if (intersection.size > 0) {
+        return this.props.navigation.navigate('CardMatch', { card });
+      }
+    }
+    // TODO: fix hardcode to index 1
+    card = cardsInWallet[1].card;
+    return this.props.navigation.navigate('CardMatch', { card });
   }
 
   _renderRowData(rowData) {
@@ -182,5 +208,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(getCurrentLocationInfo(state)),
 });
 
+GPACScreen.navigationOptions = {
+  title: 'Businesses near you',
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(GPACScreen);
