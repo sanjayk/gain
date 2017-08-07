@@ -72,6 +72,14 @@ export class HomeScreen extends React.Component {
     );
   }
   render() {
+    let msg = null;
+    if (!Array.isArray(this.props.myCards.cards)) {
+      msg = <Text style={styles.tabBarInfoText}>Sanjay You have 0 Cards in your wallet.</Text>;
+    } else {
+      msg = (<Text style={styles.tabBarInfoText}>
+        Sanjay You have {this.props.myCards.cards.length} Cards in your wallet.
+      </Text>);
+    }
     return (
       <View style={styles.container}>
 
@@ -95,7 +103,7 @@ export class HomeScreen extends React.Component {
 
         <View style={styles.tabBarInfoContainer}>
           <Text style={styles.tabBarInfoText}>
-            Sanjay You have 2 Cards in your wallet.
+            {msg}
           </Text>
         </View>
       </View>
