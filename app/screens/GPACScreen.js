@@ -180,6 +180,7 @@ export class GPACScreen extends React.Component {
         automaticallyAdjustContentInsets={false}
         renderRow={this._renderRow}
         renderFooter={this._renderPoweredLogo}
+        enableEmptySections
       />
     );
   }
