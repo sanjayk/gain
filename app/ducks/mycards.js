@@ -1,10 +1,12 @@
-const LOAD = 'LOAD';
-const LOAD_SUCCESS = 'LOAD_SUCCESS';
-const LOAD_FAIL = 'LOAD_FAIL';
+const LOAD = 'mycards/LOAD';
+const LOAD_SUCCESS = 'mycards/LOAD_SUCCESS';
+const LOAD_FAIL = 'mycards/LOAD_FAIL';
 
 const initialState = {
   loaded: false,
 };
+
+const baseAPIPath = 'http://browsekit.com';
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
@@ -39,6 +41,6 @@ export function isLoaded(globalState) {
 export function load() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: client => client.get('/myCards'),
+    promise: client => client.get(`${baseAPIPath}/myCards`),
   };
 }
