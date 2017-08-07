@@ -10,6 +10,8 @@ import {
 } from 'react-native';
 import CardSlider from './fragments/CardSlider';
 
+const sourceIcon = require('../../assets/images/gain-icon.png');
+
 const CardMatchScreen = React.createClass({
   propTypes: {
     productName: PropTypes.string,
@@ -32,12 +34,20 @@ const CardMatchScreen = React.createClass({
   render() {
     return (
       <View style={styles.container}>
-        <CardSlider
-          key={'carousel-entry-0'}
-          even={false}
-          id={0}
-          {...this.props.navigation.state.params}
-        />
+        <View style={styles.welcomeContainer}>
+          <Image source={sourceIcon} style={styles.welcomeImage} />
+        </View>
+        <View>
+          <Text style={styles.getStartedText}>You should use this card</Text>
+        </View>
+        <View>
+          <CardSlider
+            key={'carousel-entry-0'}
+            even={false}
+            id={0}
+            {...this.props.navigation.state.params}
+          />
+        </View>
       </View>
     );
   },
@@ -46,10 +56,27 @@ const CardMatchScreen = React.createClass({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#FFFFFF',
+  },
+  welcomeContainer: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  welcomeImage: {
+    width: 150,
+    height: 75,
+    resizeMode: 'contain',
+    marginTop: 3,
+    marginLeft: -10,
+  },
+  getStartedText: {
+    fontSize: 17,
+    color: 'rgba(96,100,109, 1)',
+    lineHeight: 23,
+    textAlign: 'center',
+    marginBottom: 20,
   },
 });
 
